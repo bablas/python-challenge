@@ -1,44 +1,43 @@
 import os
 import csv
 
+#Step 1 Input Files
 inputfile = os.path.join("election_data.csv")
 
-count = 0
-candidatelist = []
-unique_candidate = []
-vote_count = []
-vote_percent = []
-
-
+#Step 2 Open Input File
 with open(inputfile, newline="") as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
     csv_header = next(csvreader)
-
+    
+    totalVotes = 0
+    candidate = []
+    unique_candidate = []
+    vote_count = []
+    vote_percent = []   
+    
     for row in csvreader:
-        count = count + 1
-        # Set the candidate names to candidatelist
-        candidatelist.append(row[2])
-        # Create a set from the candidatelist to get the unique candidate names
-        
-    for x in set(candidatelist):
+#Step 3 Total count of votes
+        totalVotes = totalVotes + 1
+#Step 4 Assign the Column to Candidate
+        candidate.append(row[2])
+#Step 5 Adding to a set will give Unique candidates        
+    for x in set(candidate):
         unique_candidate.append(x)
-        # y is the total number of votes per candidate
-       
-
-        y = candidatelist.count(x)
-        vote_count.append(y)
-        # z is the percent of total votes per candidate
-        z = (y/count)*100
-        vote_percent.append(z)
-        
+#Step 6 We count how many times the candidate is in the set
+        candidate_vote_total = candidate.count(x)
+        vote_count.append(candidate_vote_total)
+#Step 7 For the percent we divided the candidate total votes by the total votes and multiplied it by 100
+        candidate_percent = (candidate_vote_total/totalVotes)*100
+        vote_percent.append(candidate_percent)
+#Step 8 We count the max votes        
     winning_vote_count = max(vote_count)
     winner = unique_candidate[vote_count.index(winning_vote_count)]
     
- 
+#Step 9 Print Results 
 print(f"-"*25)
 print(f"Election Results")   
 print(f"-"*25)
-print(f"Total Votes: {count}")    
+print(f"Total Votes: {totalVotes}")    
 print(f"-"*25)
 
 for i in range(len(unique_candidate)):
@@ -54,7 +53,7 @@ with open('election_results.txt', 'w') as text:
     text.write("\n")
     text.write(f"-"*25)
     text.write("\n")
-    text.write(f"Total Vote: {(count)}")
+    text.write(f"Total Vote: {(totalVotes)}")
     text.write("\n")
     text.write(f"-"*25)
     text.write("\n")

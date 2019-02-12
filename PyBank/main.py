@@ -1,11 +1,9 @@
 import os
 import csv
 
-#Step 1 input and output files
+#Step 1 Input
 input_file = "budget_data.csv"
-output_file = "budget_data_analysis.txt"
 csv_input= os.path.join(input_file)
-txt_output = os.path.join(output_file)
 
 #Step 2 Open Input File
 with open(csv_input, mode='r', newline='') as budget_data:
@@ -57,6 +55,9 @@ print()
 
 
 #Step 9 Write to File
+output_file = "budget_data_analysis.txt"
+txt_output = os.path.join(output_file)
+
 with open(txt_output, mode='w', newline='') as summary_txt:
     writer = csv.writer(summary_txt)
 

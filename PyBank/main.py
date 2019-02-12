@@ -1,10 +1,6 @@
 import os
 import csv
 
-date = []
-profloss = []
-
-
 #Step 1 input and output files
 input_file = "budget_data.csv"
 output_file = "budget_data_analysis.txt"
@@ -14,9 +10,10 @@ txt_output = os.path.join(output_file)
 #Step 2 Open Input File
 with open(csv_input, mode='r', newline='') as budget_data:
     reader = csv.reader(budget_data, delimiter=',')
-
     next(reader)
-
+    
+    date = []
+    profloss = []
     totalmonths = 0
     totalprofloss = 0
     for row in reader:
